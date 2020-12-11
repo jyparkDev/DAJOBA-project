@@ -1,0 +1,386 @@
+※ CREATE DATABASE daJobA default CHARACTER SET UTF8;
+※ DataSource 파일 비밀번호 바꿔주셔야 합니다!!
+
+CREATE TABLE member(
+	member_no VARCHAR(10) PRIMARY KEY,
+	member_name VARCHAR(10) NOT NULL,
+	member_id VARCHAR(20) UNIQUE,
+	member_pwd VARCHAR(20) NOT NULL,
+	member_birth VARCHAR(13) NOT NULL,
+	member_gender VARCHAR(5) NOT NULL,
+	zipcode VARCHAR(8) NOT NULL,
+	member_address VARCHAR(100) NOT NULL,
+	member_phone VARCHAR(15) UNIQUE,
+	member_email varchar(50) UNIQUE,
+	member_date DATE NOT NULL
+)CHARSET=UTF8;
+
+create table enter(
+	enter_no varchar(10) primary key,
+	enter_name varchar(12) not null,
+	enter_img varchar(30),
+	enter_url varchar(50),
+	expl text,
+	enter_industry varchar(10) not null
+)charset=utf8;
+
+CREATE TABLE admin (
+         admin_id varchar(20) PRIMARY KEY,
+         admin_passwd varchar(20) NOT NULL
+)charset=utf8;
+
+insert into admin values('dba','123');
+insert into admin values('ceo','123');
+
+
+
+
+CREATE TABLE resume (
+   resume_no int(10) NOT NULL auto_increment,
+   resume_title text NOT NULL,
+   resume_exp text,
+   resume_cert text,
+   resume_etc text,
+   resume_img text,
+   resume_date datetime NOT NULL,
+   member_num VARCHAR(10),
+   FOREIGN KEY (member_num) REFERENCES member(member_no) ON DELETE CASCADE,
+   PRIMARY KEY (resume_no)
+)charset=utf8;
+
+create table emp(
+   emp_no INT(7) PRIMARY KEY NOT NULL auto_increment,
+   emp_name VARCHAR(40) not null,
+   emp_readcnt int(5) NOT NULL,
+   emp_deadline date NOT NULL,
+   enter_num VARCHAR(10),
+   constraint FOREIGN KEY(enter_num) references enter(enter_no),
+   emp_img VARCHAR(100) not null
+)charset=utf8;
+
+create table emp_dt(
+	job varchar(20) primary key, 
+	worker varchar(25), 
+	employ varchar(20), 
+	pay varchar(20), 
+	mainwork varchar(25), 
+	applyrequire varchar(50), 
+	preference varchar(50), 
+	emp_num int(10), 
+	FOREIGN KEY(emp_num)  REFERENCES emp(emp_no)
+)charset=utf8;
+
+
+
+
+
+CREATE TABLE community(
+	community_no int(10) NOT NULL auto_increment, 
+	member_num varchar(20) NOT NULL,
+	community_name varchar(50) NOT NULL,
+	community_pass varchar(50) NOT NULL, 
+	community_title varchar(50) NOT NULL,
+	community_cont text NOT NULL,
+	community_cip varchar(20) NOT NULL,
+	community_cdate varchar(20) NOT NULL,
+	community_readcnt int(5) NOT NULL,
+	community_gnum int(5) NOT NULL,
+	community_onum int(5) NOT NULL,
+	community_nested int(5) NOT NULL,
+	PRIMARY KEY(community_no),
+	FOREIGN KEY(member_num) REFERENCES member(member_no) ON DELETE CASCADE
+)charset=utf8;
+
+CREATE TABLE review (
+	review_no int(10) NOT NULL auto_increment, 
+	review_id varchar(20) NOT NULL,
+	review_title varchar(50) NOT NULL,
+	review_category varchar(20) NOT NULL,
+	review_cont text,
+	review_ip varchar(20) NOT NULL,
+	review_date DATE NOT NULL,
+	review_like int(5) NOT NULL,
+	review_rate int(5) NOT NULL,
+	enter_num varchar(10) NOT NULL,
+	PRIMARY KEY(review_no),
+	FOREIGN KEY(review_id) REFERENCES member(member_id) ON DELETE CASCADE,
+	FOREIGN KEY(enter_num) REFERENCES enter(enter_no)
+)charset=utf8;
+
+CREATE TABLE apply(
+   apply_no int(10) NOT NULL auto_increment, 
+   member_num VARCHAR(10),
+   resume_num INT(10),
+   emp_num INT(10),
+   PRIMARY KEY(apply_no),
+   FOREIGN KEY(member_num) REFERENCES member(member_no) ON DELETE CASCADE, 
+   FOREIGN KEY(resume_num) REFERENCES resume(resume_no),
+   FOREIGN KEY(emp_num) REFERENCES emp(emp_no)
+)CHARSET=UTF8;
+
+INSERT INTO member VALUES('1','에이에이','aa','11','1980-09-24','남','135-110','서울 강남구 압구정동','010-1234-5678','aa@aa.com','2020-10-15');
+INSERT INTO member VALUES('2','홍희동','hongdo','1234','1989-10-24','여','135-898','서울 강남구 압구정1동','010-000-000','hongdo@gmail.com','2020-10-15');
+INSERT INTO member VALUES('3','홍길순','hongsu','1234','1996-09-24','여','134-786','서울 강동구 명일2동 신동아아파트','010-002-00','hongsu@gmail.com','2020-10-15');
+INSERT INTO member VALUES('4','홍희순','hongsong','1234','1998-08-21','남','131-600','서울 중랑구 서울중랑우체국사서함','010-003-00','hongsong@gmail.com','2020-10-15');
+INSERT INTO member VALUES('5','홍순','hongle','1234','1986-11-13','여','131-120','서울 중랑구 중화동','010-005-00','hongle@gmail.com','2020-10-15');
+INSERT INTO member VALUES('6','홍길동','hong','1234','1980-09-24','남','135-110','서울 강남구 압구정동','010-001-00','hong@gmail.com','2020-10-15');
+
+
+
+
+INSERT INTO enter VALUES('E0000001','네이버(주)','naver.jpg','www.naver.com','네이버(주)는 한국 최대 검색포털 네이버 뿐만 아니라, 전 세계 2억 명이 사용하고 있는 모바일 메신저 라인, 동영상 카메라 스노우, 디지털 만화 서비스 네이버웹툰 등을 서비스하고 있는 글로벌 ICT 기업입니다. 네이버는 인공지능, 로보틱스, 모빌리티 등 미래 기술에 대한 지속적인 연구개발을 통해 기술 플랫폼의 변화와 혁신을 추구하며 세계 각국의 수많은 이용자와 다양한 파트너들이 함께 성장할 수 있도록 노력하고 있습니다.
+
+네이버는 연결이 전하는 가치를 새롭게 정립하며 글로벌 도전 집합체로 진화해 나가고 있습니다. 글로벌과 호흡하는 기술을 통해 한 단계 진화한 연결의 가치를 실현하고, 미래의 기술을 오늘날 일상에서 사용할 수 있는 도구로 제안하며 연결의 새로운 가능성을 찾아갑니다. 앞으로도 더 넓은 세상에서 더 큰 미래를 꿈꾸며 네이버가 한 단계 더 도약할 수 있는 계기를 만들겠습니다.','it');
+INSERT INTO enter VALUES('E0000002','카카오','kakao.png','www.kakaocorp.com','-','it');
+INSERT INTO enter VALUES('E0000003','농심','nongshim.jpg','http://www.nongshim.co.kr','㈜농심은 1965년 9월 18일에 설립되었으며 라면, 식품 및 식품첨가물, 과자류, 유지제품 및 동가공품, 청량음료 및 기호음료, 향신료 및 향료의 제조, 가공 및 판매업을 등을 영위. 라면, 스낵, 음료의 매출이 주된 사업이며 주요제품으로 신라면, 안성탕면, 새우깡, 칩포테토, 양파링, 카프리썬, 백산수 등이 있음. 동사의 국내 라면 시장 점유율은 2013년 3분기 64.9%임. 원재료비가 비용구조에서 차지하는 비중이 높아 환율 및 국제 원자재 시세에 의한 원가변동요인의 영향이 크며, 최근에는 물가 정책 및 식품안전, 에너지, 환경 분야 등에 대한 정부의 규제 확대 경향이 수익성에 영향을 줌.','man');
+INSERT INTO enter VALUES('E0000004','SK하이닉스','skhynix.png','www.skhynix.com','에스케이하이닉스(주)는 이천, 청주의 국내 사업장을 비롯하여 중국 장쑤성 우시시에 생산공장과 10개 판매 법인 및 18개의 국내외 사무소를 두고 있는 글로벌 반도체생산 기업임. 세계 반도체 시장은 지금까지 실리콘 사이클의 순환에 따라 호황과 불황을 반복해 왔으며 제품 수명주기가 매우 짧은 특징을 가지고 있음. 메모리 반도체 산업은 제품 설계 기술, 공정 미세화 및 투자효율성 제고에 의한 원가 경쟁력 확보가 매우 중요한 산업으로서 기술력 및 원가경쟁력을 갖춘 소수 IDM업체 중심으로 점차 과점화되고 있는 추세임','man');
+INSERT INTO enter VALUES('E0000005','삼성전자','samsung.png','http://www.samsung.com/sec/','삼성전자(주)는 한국 및 CE, IM 부문 산하 해외 9개 지역총괄과 DS 부문 산하 해외 5개 지역총괄의 생산,판매법인 등 158개의 동종업종을 영위하는 종속기업으로 구성된 글로벌 전자기업임. 제품 특성에 따라 CE 사업부문, IM 사업부문, DS 사업부문 3개의 부문으로 나누어 독립 경영하고 있음. 삼성전자만의 고유 디자인을 바탕으로 프리미엄 리더십과 60인치 이상의 초대형 리더십을 강화하고, 사용자가 원하는 컨텐츠를 간편하게 제공하여 Smart TV시장을 주도할 계획. 메모리 판가는 2012년 시장 악화 지속으로 전년 대비 약 40% 하락하였으나 2013년에는 수급 안정화로 하락폭이 25%수준으로 둔화 되었음','man');
+INSERT INTO enter VALUES('E0000006','현대자동차','hyundae.jpg','www.hyundai.com/kr/','현대자동차(주)는 자동차 및 자동차부품을 제조 및 판매하는 국내 1위의 완성차 제조업체. 연결종속회사는 자동차와 자동차부품의 제조 및 판매, 차량정비 등의 사업을 운영하는 차량부문과 차량할부금융 및 결제대행업무 등의 사업을 운영하는 금융부문 및 철도차량 제작 등의 사업을 영위. 2013년 1~9월 인도시장에서는 전년동기비 8.0% 감소한 185만 1천 대가 판매되었음. 북미시장에서는 싼타페가 신 모델을 출시하면서 1만 9천 대 판매하며 호조를 보이고 있으며, 아반떼(수출명 엘란트라)는 5만 5천대 그리고 고급 차종인 그랜저도 월 900대 이상 판매하고 있음','man');
+INSERT INTO enter VALUES('E0000007','(주)한화','hanwhaj.jpg','http://www.hanwhacorp.co.kr','㈜한화는 1952년 국가와 사회에 기한다는 창업 정신으로 설립되어 지난 60여년간 국가발전에 일익을 담당하여 성장해왔습니다.
+
+㈜한화는 방산, 화약, 기계, 무역 4개 부문의 자체사업은 물론 한화생명, 한화건설, 한화테크윈, 한화케미칼, 한화호텔&리조트 등을 자회사로 보유하고 있는 한화그룹의 핵심회사 입니다.
+
+㈜한화는 한화그룹의 모기업이라는 자부심을 바탕으로 세계시장에 진출하여 지속가능한 성장을 실현하고 있습니다.','man');
+INSERT INTO enter VALUES('E0000008','기아자동차','kia.png','www.kia.com/kr/defaultdc.aspx','기아자동차(주)는 당분기 말 현재 완성차 및 부분품의 제조ㆍ판매, 렌트 및 정비용역을 사업으로 영위하고 있음. 자동차 산업은 거대한 자본이 투입되는 대규모 장치 산업이라는 특성 때문에 각 국마다 소수 업체 위주의 과점체제를 구축하고 있음. 세계적 권위의 레드닷 디자인상을 2009년 이후 5년 연속 수상을 기록한 것에 이어, 프로씨드가 2013년 레드닷 디자인상 제품 디자인 부문 최우수상을 수상하며 디자인 우수성 인정받고 있음. 미국시장은 2008년 글로벌 금융위기의 직격탄을 맞으면서 1,319만 대로 판매가 급감, 2009년은 1,040만 대까지 판매가 감소함.','man');
+INSERT INTO enter VALUES('E0000009','LG전자(주)','lgj.png','www.lge.co.kr/','엘지전자(주)는 2002년 4월 1일을 기준일로 분할 전 LG전자(주)의 전자 및 정보통신사업부문을 인적분할하여 설립한 LG계열 기업집단 소속 회사임. HE사업의 경우 선진시장의 프리미엄 제품수요 증가 및 성장시장의 Digital TV 보급 확대 등으로 기회요인이 있음. 스마트폰 Full Line-up 및 UX/Contents Service 차별화 등의 Product Leadership을 지속 확대할 계획임. 핵심부품 기술에 기반한 대용량, 고효율 중심의 제품 차별화 및 지역 적합형 제품 개발 역량을 확보하고 있으며, 원가 경쟁력 부분에서는 지속적인 개선 활동을 통해 동종 업계내에서도 높은 수익성을 유지하고 있음','man');
+INSERT INTO enter VALUES('E0000010','스타벅스','starbucks.png','www.istarbucks.co.kr','스타벅스커피코리아는 스타벅스 인터내셔널과 ㈜신세계의 공동 투자로설립되어, 1999년 이대점 1호점에서 시작해 직영 매장으로 2012년 500호점을 돌파하며 지속적인 성장을 이어오고 있음. 커피를 윤리적으로 구매 단계에서부터 한 잔의 음료로 나가기까지의 모든 과정을 체계적으로 관리함. 본사 서울특별시 중구 소공로 소재.','ser');
+
+
+
+INSERT INTO enter VALUES(
+'E0000011',
+'공상은행',
+'',
+'www.icbc.co.kr',
+'1984년 1월 1일 중국공상은행(ICBC)은 국유 상업은행으로 출범하였으며, 2005년 10월 주식제 상업은행인 중국공상은행주식회사로 전환했습니다. 주식제 전환 이후 2006년 10월 27일에는 홍콩과 상해에서 당시 세계 최대 규모로 동시 상장했습니다. 지속적인 노력과 발전에 힘입어 중국공상은행은 진정한 글로벌 리딩 뱅크로 도약했으며, 우량한 고객 기반, 다양한 업무 포트폴리오, 강력한 혁신능력 및 시장경쟁력을 가지고 있습니다. 현재 17,111개 중국내 네트워크와 45개국 422개 점포로 이루어진 글로벌 네트워크를 구축하고 있으며, 전세계 5.77억 개인고객 및 646만 고객의 수요에 맞는 차별화된 금융 서비스를 제공하고자 노력하고 있습니다.'
+,'ban');
+
+INSERT INTO enter VALUES(
+'E0000012',
+'스탠다드차타드은행',
+'',
+'http://www.standardchartered.co.kr','스탠다드차타드 은행(영어: Standard Chartered plc 스탠더드 차더드 plc[*])은 영국 런던에 본사를 둔 영국계 은행이다.
+현재의 사명은 차타드 뱅크 오브 인디아, 오스트레일리아 앤드 차이나(The Chartered Bank of India, Australia and China)와 스탠다드 뱅크 오브 브리티시 서우스 아프리카(The Standard Bank of British South Africa)가 1969년 합병해 출범하였다. 영국에 있음에도 영국 국내보다 중동이나 아시아 지역에서의 영업망이 좀더 많다.
+대한민국에는 1968년에 기업금융 분야에 처음 진출[1]하였으며, 2005년에 제일은행을 인수하면서 일반금융에 진출하였다. 그 전까지만 해도 대중들에게는 잘 알려지지 않은 외국계 은행이었다. 중국은행, HSBC과 함께 홍콩에서 홍콩 달러를 발권하는 은행이지만, 이 은행에서 발권하는 것은 주로 소액권이다.',
+'ban');
+
+
+
+INSERT INTO enter VALUES('E0000013','한국나눔장학재단','','http://jj.1004q.co.kr/
+','튼튼한 뿌리를 가진 나무가 풍성한 가지와 열매를 맺을 수 있다는 말처럼
+(재)한국나눔장학재단은 어려운 여건 때문에 배움의 기회를 잃은 인재들에게 굵고 튼튼한 뿌리가 되어주려고 합니다.
+우리 사회에는 경제적 그늘에 가려져 힘든 환경 속에서 꿈을 잃어버린 학생들과 소외된 이웃들이 많이 있습니다.
+그들이 꿈을 펼칠 기회조차 가지지 못한다는 것은 너무나 안타까운 일입니다.
+세상을 바꾸는 것은 사람이고 사람을 바꾸는 것은 교육입니다. (재)한국나눔장학재단은 그러한 환경 속에서도
+우수한 자질과 능력을 갖춘 가능성 있는 인재들이 학업에 정진할 수 있는 기회를 제공하고 미래 성장의 등불이 되려고 합니다.
+양질의 교육환경을 조성하기 위한 교육환경개선과 사회 균형 발전을 선도할 유능하고 우수한 인재 발굴 및 장학금 지원, 대학의 국제교류 및 해외 문화탐방 지원 등 다양한 교육 사업을 추진하며 더욱 국가 경쟁력을 높이는 글로벌 인재로 육성하고자 합니다.
+본 (재)한국나눔장학재단은 미래사회를 바라보는 글로벌한 인재육성과 교육환경 개선, 사회발전을 도모하고 나아가 국가 발전을 도모하는 주춧돌이 될 것을 약속 드립니다.','gov');
+
+INSERT INTO enter VALUES('E0000014','(재)한국전기산업연구원','','www.erik.re.kr
+','한국전기산업연구원은 전기공사업 관련분야 전반에 관한 체계적인 연구로 전기산업의 건전한 육성발전과
+전기산업기술을 향상을 이룩하고 전기설비 및 시공분야의 경쟁력 제고를 통한 국가경제발전에 기여함을 목적으로 합니다. ','gov');
+
+
+
+INSERT INTO enter VALUES('E0000015','오스템임플란트(주)','','
+설립 이래 보다 건강한 먹거리를 제공하고자 하는 소명의식을 가지고 자돈 전문 사료 및 사료 첨가제 솔루션을 제공하며, 축산업의 지속가능성을 높일 수 있는 신제품 개발에 매진하고 있습니다.
+농축산식품에 대한 전문성을 바탕으로 국내뿐 아니라 해외 국가에 꾸준히 진출하여, 대한민국 생물자원산업의 미래를 준비하고 있습니다.
+열린 마음과 따뜻한 가슴을 가지고, 끊임없는 노력과 열정으로 새로운 지식을 익히고 신기술을 개발하여 인류의 건강한 삶과 깨끗한 환경을 일구는 21세기 생물자원산업의 개척자로서 새로운 기준을 제시하는 가치창조기업이 되고자 합니다.','hos');
+
+INSERT INTO enter VALUES('E0000016','(주)이지바이오','','www.easybio.co.kr','
+· 국내 임플란트 시장은 외산 제품이 주류를 이루었던 시기에 1997년 국내 최초로 임플란트를 보급
+· 국내 업체 간 경쟁 양상으로 치과용 임플란트 공급이 많이 이루어지면서 치과 시술 단가 가격 하락
+· 전 세계적으로 임플란트 산업은 여전히 고부가가치 산업이며, 성장잠재력이 높은 고성장 산업
+· 고령인구 증가와 복지수준의 향상으로 한층 더 차별화된 의료 서비스의 선호 추세','hos');
+
+
+
+INSERT INTO enter VALUES('E0000017','에어콘테이너로지스틱스','','http://www.aircontainer.co.kr
+','우리회사는 21세기 물류의 리더 (이)다.
+왜냐하면 젊은 인재들이 고객의 물류를 위해 최선을 다하고 있기 때문이다.
+우리회사 직원은 참신하 (이)다.
+우리회사 키워드1 : 젊음
+우리회사 키워드2 : 열정
+우리회사 키워드3 : 패기
+우리회사 CEO 어록 : 300년 기업을 만들자
+주 수익 모델은? 3PL/3자물류/AUTO-PARTS
+대표 브렌드는? ACL (AMBITIOUS CHALLENGING LEADER)','log');
+
+INSERT INTO enter VALUES('E0000018','한솔로지스틱스(주) ','','http://www.hansollogistics.com
+','업종별 성장성
+· 물류산업과 관련하여 국내외 수요증가가 기대되나 해상운송은 선박과잉 지속으로 수급개선이 어려울 것으로 예상
+· 세계경제의 소폭 회복으로 물동량 증가속도가 둔화된 상황에서 해운호황기에 발주한 선박의 인도 등으로 인해 선복량 증가 및 벌크선의 수급 불균형이 발생하였고, 결과적으로 업황부진이 계속되고 있는 상황
+· 항공 물류의 경우 전기전자, 기계류 등의 운송 증가로 운송물량 증가율의 상승이 예상되고 있으나, 그 규모는 제한적일 것으로 예상
+
+구조개편으로 인한 성장성
+· 영세한 현재의 업계 구조는 오래가기 힘든 상황
+· 난립한 영세 운송회사는 점차 존립기반을 잃어가고 있고 결국 대형 운송회사 위주로 시장이 재편될 것으로 예상
+· 대형화 트렌드는 안정적인 물류시장 확대에 기여할 것으로 보임
+· 대형화는 세계적인 추세임에도 불구하고 한국 선두업체의 면면을 살펴보면 선진국 대형업체에 비해 아직도 개선되어야 할 부분이 많다고 판단됨
+
+제3자물류업 성장성
+· 글로벌위기이후 국내 물류시장의 증가세속에 당사 매출에 중요한 비율을 차지하는 제3자물류 즉 3PL 산업역시 지속적으로 성장
+운송주선업 성장성
+· 주선업의 매출액은 연평균 15% 수준으로 지속적으로 증가하였음을 확인할 수 있음
+· 그러나 업체별 평균 매출액은 2011년 기준으로 4.9억원에 불과함','log');
+
+INSERT INTO enter VALUES('E0000019','㈜해커스교육그룹','','http://www.hackers.com/
+','해커스교육그룹(Hackers)은 1999년 창립된 어학교육그룹이다.
+1999년 여름 해커스 프로그램을 개발하는 것을 시작으로 1999년 가을에 어학연구소를 설립한 뒤 교재등을 연구하여 2002년 11월 해커스 토플 그래머를 출간하는 것을 시작으로 현재까지 토플과 토익, 텝스와 관련된 서적을 출간하고 있다.
+2003년 12월부터 학원 사업에 진출하여 2004년 1월에 삼성역 부근(본원) 및 선릉역부근(분원)에 첫 학원을 열었고, 2006년 1월에는 온라인 강의 사업을 시작하였다. 2008년 2월에는 삼성역 부근에 있던 본원을 강남역 부근으로 이전하였다. 2008년 6월에는 취업 사이트인 해커스잡을 론칭하였으며, 2009년 10월에는 중학생과 고등학생 대상의 온라인 커뮤니티 점프해커스를 론칭하였다.
+','edu');
+
+INSERT INTO enter VALUES('E0000020','(주)에듀윌 ','','http://www.eduwill.net','#꿈을 현실로 만드는 교육기업, 에듀윌
+에듀윌은 사람들이 꿈꾸는 삶을 현실로 만드는 일을 합니다.
+교육이 인생을 바꾸고 세상을 바꿀 수 있다고 믿습니다.
+그 가치를 함께할 인재를 기다립니다.','edu');
+
+
+INSERT INTO enter VALUES('E0000021','현대건설','','http://www.hdec.co.kr'
+,'우리회사는 건설회사 (이)다.
+왜냐하면 건설업으로 대한민국 1등 이기 때문이다.
+우리회사 직원은 지칠줄 모르는 패기와 열정으로 똘똘 뭉쳐있 (이)다.
+우리회사 키워드1 : 창조적 예지
+우리회사 키워드2 : 적극 의지
+우리회사 키워드3 : 강인한 추진력
+우리회사 CEO 어록 : 경영방침: 신뢰경영,현장경영,투명경영
+주 수익 모델은? 국. 해외 공사 수주
+대표 브랜드는? 힐스테이트','con');
+
+INSERT INTO enter VALUES('E0000022','(주)미래도시건설','','http://www.miraedosi.com
+','——','con');
+
+INSERT INTO enter VALUES('E0000023','대원미디어(주)','','http://www.daewonmedia.com
+','주요 사업내용 : 애니메이션 제작과 배급, 수출입, 캐릭터라이센스 사업유희왕 트레이딩 카드게임 제작
+주요 취급품목 : 애니메이션, 캐릭터상품, 카드게임, 스마트게임','med');
+
+INSERT INTO enter VALUES('E0000024','시네온티브이','','http://www.asiantv.co.kr
+','방송프로그램 제작,공급/전자상거래/온라인 모바일 게임소프트웨어 개발,공급
+기업비전 FUN FUN한 아시아 채널 아시아앤
+','med');
+
+INSERT INTO EMP VALUES(1,'네이버 개발자 모집','0',now(),'E0000001','naver.jpg');
+INSERT INTO EMP VALUES(2,'카카오 모집','0',now(),'E0000002','kakao.png');
+INSERT INTO EMP VALUES(3,'농심 직원 모집','0',now(),'E0000003','nongshim.jpg');
+INSERT INTO EMP VALUES(4,'sk하이닉스 직원 모집','0',now(),'E0000004','skhynix.png');
+INSERT INTO EMP VALUES(5,'삼성전자','0',now(),'E0000005','samsung.png');
+INSERT INTO EMP VALUES(6,'현대자동차 모집','0',now(),'E0000006','hyundae.jpg');
+INSERT INTO EMP VALUES(7,'한화(주) 모집','0',now(),'E0000007','hanwhaj.jpg');
+INSERT INTO EMP VALUES(8,'기아자동차(주) 모집','0',now(),'E0000008','kia.png');
+INSERT INTO EMP VALUES(9,'LG전자(주)','0',now(),'E0000009','lgj.png');
+INSERT INTO EMP VALUES(10,'스타벅스 모집','0',now(),'E0000010','starbucks.png'); 
+
+INSERT INTO EMP VALUES(11,'공상은행 모집','0',now(),'E0000011','search.png');
+INSERT INTO EMP VALUES(12,'한국나눔장학재단 모집','0',now(),'E0000013','search.png');
+INSERT INTO EMP VALUES(13,'오스템임플란트(주) 모집','0',now(),'E0000015','search.png');
+INSERT INTO EMP VALUES(14,'한솔로지스틱스(주) 모집','0',now(),'E0000018','search.png');
+INSERT INTO EMP VALUES(15,'(주)해커스교육그룹 모집','0',now(),'E0000019','search.png');
+INSERT INTO EMP VALUES(16,'현대건설 모집','0',now(),'E0000021','search.png');
+INSERT INTO EMP VALUES(17,'시네온티브이(주) 모집','0',now(),'E0000024','search.png');
+
+insert into emp_dt values('개발자','신입','정규직','면접 후 결정','프론트 개발','자바교육수료','4년제우대','1');
+insert into emp_dt values('인사관리팀','신입','정규직','면접 후 결정','인사관리','FAT필수','4년제우대','2');
+insert into emp_dt values('영업관리','신입','정규직','면접 후 결정','시식사원','라면교육필수','4년제우대','3');
+insert into emp_dt values('반도체개발','신입','정규직','면접 후 결정','반도체개발','박사이상','논문우대','4');
+insert into emp_dt values('스마트폰개발','신입','정규직','면접 후 결정','디자인','디자인교육수료','성균관대우대','5');
+insert into emp_dt values('생산직','신입','정규직','면접 후 결정','자동차 생산','하청업체2년근무이상','4년제우대','6');
+insert into emp_dt values('방산개발','신입','정규직','면접 후 결정','방산무기개발','박사이상','논문우대','7');
+insert into emp_dt values('자동차디자인','신입','정규직','면접 후 결정','디자인 개발','디자인자격증','석사이상 우대','8');
+insert into emp_dt values('TV 개발','신입','정규직','면접 후 결정','LED TV 개발','기사자격증','대학원 이상 우대','9');
+insert into emp_dt values('바리스타','신입','정규직','면접 후 결정','프론트 개발','바리스타 근무 6개월 이상','고졸 이상','10');
+
+INSERT INTO review VALUES(1,'hong','이 회사 정말 괜찮음','interview','초보들이 들어가서 배울때 참 괜찮은 회사임 기초부터 업무 가르쳐줌','172.30.1.10','2020-10-15','1',3,'E0000001');
+INSERT INTO review VALUES(2,'hongdo','국내 1등 라면회사','interview','라면을 좋아한다면 매일 하루 한끼 라면 먹을수 있는 꿈의 직장','172.30.1.10','2020-10-15','1',5,'E0000003');
+INSERT INTO review VALUES(3,'hongsong','바리스타 고용','interview','지구촌 어디를 가나 가장 흔한 회사이며 사내복지 선불카드 줌','172.30.1.10','2020-10-15','1',2,'E0000010');
+INSERT INTO review VALUES(4,'hongle','1등 자동차업체','interview','대기업이라 급여가 아주 높고 교육도 충실함','172.30.1.10','2020-10-15','1',3,'E0000006');
+INSERT INTO review VALUES(5,'hongle','2등 전자회사','interview','백색가전부는 급여도 좋고 대우도 좋으나 모바일은 영...','172.30.1.10','2020-10-15','1',4,'E0000009');
+INSERT INTO review VALUES(6,'hongsu','2등 전자회사','interview','백색가전부는 급여도 좋고 대우도 좋으나 모바일은 영...','172.30.1.10','2020-10-15','1',1,'E0000009');
+INSERT INTO review VALUES(7,'hongsong','2등 전자회사','interview','백색가전부는 급여도 좋고 대우도 좋으나 모바일은 영...','172.30.1.10','2020-10-15','1',3,'E0000009');
+INSERT INTO review VALUES(8,'hongle','2등 전자회사','interview','백색가전부는 급여도 좋고 대우도 좋으나 모바일은 영...','172.30.1.10','2020-10-15','1',2,'E0000009');
+
+INSERT INTO review VALUES(9,'hongsong','이 회사 정말 괜찮음','interview','초보들이 들어가서 배울때 참 괜찮은 회사임 기초부터 업무 가르쳐줌','172.30.1.10','2020-10-15','1',3,'E0000001');
+INSERT INTO review VALUES(10,'hongdo','이 회사 정말 괜찮음','interview','초보들이 들어가서 배울때 참 괜찮은 회사임 기초부터 업무 가르쳐줌','172.30.1.10','2020-10-15','1',3,'E0000001');
+INSERT INTO review VALUES(11,'hongsu','이 회사 정말 괜찮음','interview','초보들이 들어가서 배울때 참 괜찮은 회사임 기초부터 업무 가르쳐줌','172.30.1.10','2020-10-15','1',3,'E0000001');
+
+INSERT INTO review VALUES(12,'hongsong','바리스타 고용','interview','지구촌 어디를 가나 가장 흔한 회사이며 사내복지 선불카드 줌','172.30.1.10','2020-10-15','1',5,'E0000010');
+INSERT INTO review VALUES(13,'hongdo','바리스타 고용','interview','지구촌 어디를 가나 가장 흔한 회사이며 사내복지 선불카드 줌','172.30.1.10','2020-10-15','1',4,'E0000010');
+INSERT INTO review VALUES(14,'hongle','바리스타 고용','interview','지구촌 어디를 가나 가장 흔한 회사이며 사내복지 선불카드 줌','172.30.1.10','2020-10-15','1',1,'E0000010');
+
+INSERT INTO review VALUES(15,'hong','1등 자동차업체','interview','대기업이라 급여가 아주 높고 교육도 충실함','172.30.1.10','2020-10-15','1',5,'E0000006');
+INSERT INTO review VALUES(16,'hongsu','1등 자동차업체','interview','대기업이라 급여가 아주 높고 교육도 충실함','172.30.1.10','2020-10-15','1',4,'E0000006');
+INSERT INTO review VALUES(17,'hongsong','1등 자동차업체','interview','대기업이라 급여가 아주 높고 교육도 충실함','172.30.1.10','2020-10-15','1',2,'E0000006');
+
+INSERT INTO review VALUES(18,'hongsu','국내 1등 라면회사','interview','라면을 좋아한다면 매일 하루 한끼 라면 먹을수 있는 꿈의 직장','172.30.1.10','2020-10-15','1',3,'E0000003');
+INSERT INTO review VALUES(19,'hongle','국내 1등 라면회사','interview','라면을 좋아한다면 매일 하루 한끼 라면 먹을수 있는 꿈의 직장','172.30.1.10','2020-10-15','1',4,'E0000003');
+INSERT INTO review VALUES(20,'hong','국내 1등 라면회사','interview','라면을 좋아한다면 매일 하루 한끼 라면 먹을수 있는 꿈의 직장','172.30.1.10','2020-10-15','1',1,'E0000003');
+
+
+
+insert into emp_dt values('소매금융 텔러','신입','계약직','면접 후 결정','개인 고객 재무설계','영어, 중국어 필수','4년제우대, 금융권 경력자 우대','11');
+insert into emp_dt values('회계팀' ,'경력','정규직','면접 후 결정','월급여 관리,퇴직연금관리, 4대보험 신고 등','유관경험 3년 이상', '4년제우대, 금융 자격증 보유자 우대','12');
+insert into emp_dt values('의약품 물류 담당','경력','계약직','면접 후 결정','TM, 물류 및 재고 관리','없음','4년제우대, 영어 가능자 우대','13');
+insert into emp_dt values('포워딩운영팀 채용','계약직' ,'계약직','면접 후 결정','포워딩운영업무','고교 졸업 이상, 비즈니스 영어 필수','4년제우대, 기타 외국어 가능자','14');
+insert into emp_dt values('원어민 HSK/중국어 회화 전문강사','신입','계약직','면접 후 결정','','대졸 이상, 표준어 구사','한국어 가능자, 중국어 강의 경력 有, 밝은 성향','15');
+insert into emp_dt values('건축자재/총무','무관','계약직','3,800~4,000만원','건축현장 자재/총무 관리','-','유관 경험 有','16');
+insert into emp_dt value('경영관리팀','경력직','정규직','면접 후 결정','회계 및 인사, 총무','회계프로그램(더존)사용 가능자, 2~3년 경력 수준','오피스활용능력 우수자, 관련학과 전공자','17');
+
+update enter set enter_img = 'icbc.png' where enter_no = 'E0000011';
+update enter set enter_img = 'standardchartered.png' where enter_no = 'E0000012';
+update enter set enter_img = 'hanguknanum.png' where enter_no = 'E0000013';
+update enter set enter_img = 'erik.png' where enter_no = 'E0000014';
+update enter set enter_img = 'osstem.png' where enter_no = 'E0000015';
+update enter set enter_img = 'easybio.png' where enter_no = 'E0000016';
+update enter set enter_img = 'aircontainer.png' where enter_no = 'E0000017';
+update enter set enter_img = 'hansol.png' where enter_no = 'E0000018';
+update enter set enter_img = 'hackers.png' where enter_no = 'E0000019';
+update enter set enter_img = 'eduwill.png' where enter_no = 'E0000020';
+update enter set enter_img = 'hyundai.png' where enter_no = 'E0000021';
+update enter set enter_img = 'miraedosi.png' where enter_no = 'E0000022';
+update enter set enter_img = 'daewon.png' where enter_no = 'E0000023';
+update enter set enter_img = 'cineontv.png' where enter_no = 'E0000024';
+
+
+INSERT INTO community VALUES('001','1','취업','1234','취업하고싶어','취업방법을 알려주세요','172.30.1.10','2020-10-15','0','0001','00001','1');
+INSERT INTO community VALUES('002','2','취업','1234','취업할수있을까?','저에게 힘을주세요','172.30.1.10','2020-10-15','0','0002','00002','2');
+INSERT INTO community VALUES('003','3','취업','1234','취업실패','어떻게 업종을 바꾸어야 할까요','172.30.1.10','2020-10-15','0','0003','00003','3');
+INSERT INTO community VALUES('004','4','취업','1234','대졸 취업은 어떤가요?','지방 국립대 4년제 졸업입니다.','172.30.1.10','2020-10-15','0','0004','00004','4');
+INSERT INTO community VALUES('005','5','취업','1234','고졸취업','조언좀 해주세요','172.30.1.10','2020-10-15','0','0005','00005','5');
+
+
+
+
+
+SELECT * FROM community;
+SELECT * FROM review;
+SELECT * FROM member;
+SELECT * FROM admin;
+SELECT * FROM RESUME;
+SELECT * FROM enter;
+SELECT * FROM emp;
+SELECT * FROM apply;
+
+
+desc community;
+desc review;
+desc member;
+desc admin;
+desc resume;
+desc enter;
+desc emp;
+desc apply;
+
+DROP TABLE scrap;
+DROP TABLE review;
+DROP TABLE apply;
+DROP TABLE community;
+DROP TABLE emp_dt;
+
+DROP TABLE resume;
+DROP TABLE emp;
+
+DROP TABLE enter;
+DROP TABLE admin;
+DROP TABLE member;
+
+select * from information_schema.table_constraints where table_name = '테이블명'
+select * from information_schema.table_constraints where constraint_schema = '데이터베이스명'
