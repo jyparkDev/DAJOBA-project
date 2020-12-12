@@ -46,9 +46,9 @@
   * 로그인 버튼을 통하여 로그인 페이지로 이동
   * 비밀번호 이메일/ 전화번호로 찾기 제공(하나의 영역에 값을 입력 시 다른 영역은 잠김)
 <div>
-  <img src="https://user-images.githubusercontent.com/72076023/101980288-ad527780-3ca7-11eb-9ae9-0880797e633f.png" width="30%"> </img>
-  <img src="https://user-images.githubusercontent.com/72076023/101980294-afb4d180-3ca7-11eb-882e-3fe98562d137.png" width="30%"> </img>
-  <img src="https://user-images.githubusercontent.com/72076023/101980287-ad527780-3ca7-11eb-8e2c-648458e7f3c0.png" width="30%"> </img>
+  <img src="https://user-images.githubusercontent.com/72076023/101980288-ad527780-3ca7-11eb-9ae9-0880797e633f.png" width="30%" height="200px"> </img>
+  <img src="https://user-images.githubusercontent.com/72076023/101980294-afb4d180-3ca7-11eb-882e-3fe98562d137.png" width="30%" height="200px"> </img>
+  <img src="https://user-images.githubusercontent.com/72076023/101980287-ad527780-3ca7-11eb-8e2c-648458e7f3c0.png" width="30%" height="200px"> </img>
 </div>
 
 
@@ -61,9 +61,9 @@
   * 현직자 인터뷰에서 별점 부여 기능
   * 한 글자 이상 입력 시 관련 기업 조회
 <div>
-  <img src="https://user-images.githubusercontent.com/72076023/101980290-ae83a480-3ca7-11eb-9dd3-07ff6e0dc5c5.png" width="30%"> </img>
-  <img src="https://user-images.githubusercontent.com/72076023/101980292-af1c3b00-3ca7-11eb-949b-65383dbab86a.png" width="30%"> </img>
-  <img src="https://user-images.githubusercontent.com/72076023/101980291-af1c3b00-3ca7-11eb-986d-962f2070b492.png" width="30%"> </img>
+  <img src="https://user-images.githubusercontent.com/72076023/101980290-ae83a480-3ca7-11eb-9dd3-07ff6e0dc5c5.png" width="30%" height="200px"> </img>
+  <img src="https://user-images.githubusercontent.com/72076023/101980292-af1c3b00-3ca7-11eb-949b-65383dbab86a.png" width="30%" height="200px"> </img>
+  <img src="https://user-images.githubusercontent.com/72076023/101980291-af1c3b00-3ca7-11eb-986d-962f2070b492.png" width="30%" height="200px"> </img>
 </div>
 
 --------------------------
@@ -75,9 +75,9 @@
   * Ajax : Ajax를 활용하여 세션 정보를 통한 개인 이력서를 받아와서 pop-up창으로 처리
   * 한 글자 이상 입력 시 관련 기업 공고 조회
 <div>
-  <img src="https://user-images.githubusercontent.com/72076023/101980298-b0e5fe80-3ca7-11eb-8b15-7608fc2418ca.png" width="30%"> </img>
-  <img src="https://user-images.githubusercontent.com/72076023/101980286-acb9e100-3ca7-11eb-9555-73a80eb52da7.png" width="30%"> </img>
-  <img src="https://user-images.githubusercontent.com/72076023/101980285-acb9e100-3ca7-11eb-9266-35f33e980216.png" width="30%"> </img>
+  <img src="https://user-images.githubusercontent.com/72076023/101980298-b0e5fe80-3ca7-11eb-8b15-7608fc2418ca.png" width="30%" height="200px"> </img>
+  <img src="https://user-images.githubusercontent.com/72076023/101980286-acb9e100-3ca7-11eb-9555-73a80eb52da7.png" width="30%" height="200px"> </img>
+  <img src="https://user-images.githubusercontent.com/72076023/101980285-acb9e100-3ca7-11eb-9266-35f33e980216.png" width="30%" height="200px"> </img>
 </div>
 
 --------------------------
@@ -90,8 +90,8 @@
   * 작성 된 이력서 현황 페이지에서 작성된 이력서 확인 가능
   * 지원현황 페이지에서 채공공고 지원 시 사용한 이력서명 / 지원공고명/ 지원기업 확인 가능
 <div>
-    <img src="https://user-images.githubusercontent.com/72076023/101980293-afb4d180-3ca7-11eb-8c0e-754b8d9ea62d.png" width="30%"> </img>
-    <img src="https://user-images.githubusercontent.com/72076023/101980295-b04d6800-3ca7-11eb-98b0-0f8fba92e8c1.png" width="30%"> </img>
+    <img src="https://user-images.githubusercontent.com/72076023/101980293-afb4d180-3ca7-11eb-8c0e-754b8d9ea62d.png" width="30%" height="200px"> </img>
+    <img src="https://user-images.githubusercontent.com/72076023/101980295-b04d6800-3ca7-11eb-98b0-0f8fba92e8c1.png" width="30%" height="200px"> </img>
     <img src="https://user-images.githubusercontent.com/72076023/101980297-b0e5fe80-3ca7-11eb-813c-3d5545c400fc.png" width="30%"> </img>
 </div>
 <div>
