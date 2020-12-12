@@ -92,7 +92,7 @@
 <div>
     <img src="https://user-images.githubusercontent.com/72076023/101980293-afb4d180-3ca7-11eb-8c0e-754b8d9ea62d.png" width="30%" height="200px"> </img>
     <img src="https://user-images.githubusercontent.com/72076023/101980295-b04d6800-3ca7-11eb-98b0-0f8fba92e8c1.png" width="30%" height="200px"> </img>
-    <img src="https://user-images.githubusercontent.com/72076023/101980297-b0e5fe80-3ca7-11eb-813c-3d5545c400fc.png" width="30%"> </img>
+    <img src="https://user-images.githubusercontent.com/72076023/101981322-50f35600-3caf-11eb-88c2-bfa05b799a18.png" width="25%"> </img>
 </div>
 <div>
   <img src="https://user-images.githubusercontent.com/72076023/101980283-ab88b400-3ca7-11eb-8a3e-0c45f86725a8.png" width="45%" height="400px"> </img>
